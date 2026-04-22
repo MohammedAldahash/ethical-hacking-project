@@ -1,0 +1,6 @@
+# Credentials — never commit these
+.env
+
+# Dependencies — regenerated with npm install
+node_modules/
+package-lock.json

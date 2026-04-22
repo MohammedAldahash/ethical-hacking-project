@@ -1,0 +1,22 @@
+{
+  "name": "email-campaign-cli",
+  "version": "1.0.0",
+  "description": "AI-powered email campaign CLI tool — 100% free using Groq + Gmail",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "email-campaign": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "dotenv": "^16.4.5",
+    "groq-sdk": "^0.9.0",
+    "inquirer": "^9.2.20",
+    "nodemailer": "^6.9.13",
+    "ora": "^8.0.1"
+  }
+}
