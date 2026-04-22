@@ -55,23 +55,23 @@ Gmail requires an "App Password" for third-party tools (more secure than your re
 
 ---
 
-### Step 4 — Download & Install the Tool
+### Step 4 — Clone the Repo & Install Dependencies
 
 ```bash
-# Create a folder for the project
-mkdir email-campaign-cli
-cd email-campaign-cli
-
-# Place all the downloaded files in this folder, then install dependencies
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+cd YOUR_REPO_NAME
 npm install
 ```
 
-Your folder should look like this:
+> **Note:** `.env` and `node_modules/` are excluded from the repo via `.gitignore`. After cloning you will not have a `.env` file — that is expected. Step 5 (the setup wizard) creates it for you.
+
+Your folder should look like this after cloning and running `npm install`:
 ```
-email-campaign-cli/
+EmailProject/
 ├── index.js
 ├── package.json
 ├── .env.example
+├── .gitignore
 ├── README.md
 ├── commands/
 │   ├── compose.js
@@ -81,8 +81,9 @@ email-campaign-cli/
 │   ├── emailSender.js
 │   ├── tones.js
 │   └── recipients.js
-└── data/
-    └── recipients.json
+├── data/
+│   └── recipients.json
+└── node_modules/       ← created by npm install, not in the repo
 ```
 
 ---
@@ -179,7 +180,7 @@ Lists are stored in `data/recipients.json` on your machine.
 → Run `node index.js setup` and enter your Groq key, or manually create a `.env` file based on `.env.example`
 
 **"SMTP connection failed"**
-→ Double-check your Gmail App Password — it must be the 16-character generated password, NOT your regular Gmail password
+→ Double-check your Gmail App Password — it must be the 16-character generated password, NOT your regular Gmail password.
 
 **"App passwords" option missing in Google Account**
 → You need to enable 2-Step Verification first under Security settings
@@ -195,9 +196,11 @@ Lists are stored in `data/recipients.json` on your machine.
 ## Privacy & Security
 
 - Your `.env` file contains sensitive keys — never share it or commit it to Git
-- Add `.env` to your `.gitignore` if using version control
+- `.env` and `node_modules/` are already listed in `.gitignore` — they will not be pushed to GitHub
+- Never delete or edit `.gitignore` unless you know what you are doing
 - Groq does not store your prompts permanently (see their privacy policy)
 - Emails are sent directly from your Gmail account
+- Use a spare Gmail account rather than your primary one for SMTP sending
 
 ---
 
