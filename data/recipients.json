@@ -7,6 +7,9 @@
     "emails": [
       "recipient@example.com",
       "mohom3535@gmail.com"
+    ],
+    "my-email": [
+      "mohom3535@gmail.com"
     ]
   }
 }
