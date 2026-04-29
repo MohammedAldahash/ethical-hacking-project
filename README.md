@@ -1,11 +1,20 @@
-# ✉ AI Email Campaign CLI
-### 100% Free · Powered by Groq + Gmail
+# ICS-442 Email Project
 
-A command-line tool that uses AI to write personalized sales emails and send them via Gmail — completely free, no credit card required.
+Two complementary email-intelligence tools built for ICS-442:
+
+| Tool | Description |
+|---|---|
+| **AI Email Campaign CLI** | Write & send personalized sales emails via Groq + Gmail |
+| **Phishing Detector** | Detect phishing emails with a fine-tuned RoBERTa model |
 
 ---
 
-## What You Need (All Free)
+## Tool 1 — AI Email Campaign CLI
+### 100% Free · Powered by Groq + Gmail
+
+A command-line tool that uses AI to write personalized sales emails and send them via Gmail.
+
+### Requirements
 
 | Requirement | Where to get it | Cost |
 |---|---|---|
@@ -14,65 +23,62 @@ A command-line tool that uses AI to write personalized sales emails and send the
 | Gmail account | https://gmail.com | Free |
 | Gmail App Password | Google Account settings | Free |
 
----
+### Setup
 
-## Step-by-Step Setup Guide
-
-### Step 1 — Install Node.js
-If you don't have Node.js installed:
-- Go to https://nodejs.org
-- Download and install the **LTS version**
-- Verify by running: `node --version` (should show v18 or higher)
-
----
-
-### Step 2 — Get Your Free Groq API Key
-Groq is a free AI service — no credit card needed.
-
-1. Go to **https://console.groq.com**
-2. Click **Sign Up** and create a free account
-3. Once logged in, go to **API Keys** in the left sidebar
-4. Click **Create API Key**
-5. Give it a name like `email-campaign`
-6. **Copy the key** — you'll need it in Step 5
-
----
-
-### Step 3 — Set Up Gmail App Password
-Gmail requires an "App Password" for third-party tools (more secure than your real password).
-
-1. Go to your **Google Account** → https://myaccount.google.com
-2. Click **Security** in the left sidebar
-3. Under "How you sign in to Google", enable **2-Step Verification** (if not already on)
-4. Go back to Security, scroll down and click **App passwords**
-   - Direct link: https://myaccount.google.com/apppasswords
-5. Under "Select app", choose **Mail**
-6. Under "Select device", choose **Other** and type `email-campaign`
-7. Click **Generate**
-8. **Copy the 16-character password** shown — you'll need it in Step 5
-
-> ⚠️ If you don't see "App passwords", make sure 2-Step Verification is turned ON first.
-
----
-
-### Step 4 — Clone the Repo & Install Dependencies
-
+**Step 1 — Install Node.js**
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+node --version   # should show v18 or higher
+```
+
+**Step 2 — Get a free Groq API key** at https://console.groq.com → API Keys → Create API Key
+
+**Step 3 — Create a Gmail App Password**
+1. Google Account → Security → enable 2-Step Verification
+2. Security → App passwords → Mail → Other → Generate
+3. Copy the 16-character password
+
+**Step 4 — Clone & install**
+```bash
+git clone https://github.com/MohammedAldahash/ICS-442-EmailProject.git
+cd ICS-442-EmailProject
 npm install
 ```
 
-> **Note:** `.env` and `node_modules/` are excluded from the repo via `.gitignore`. After cloning you will not have a `.env` file — that is expected. Step 5 (the setup wizard) creates it for you.
+**Step 5 — Configure**
+```bash
+node index.js setup
+```
+Prompts for your Groq key, Gmail address, and App Password. Creates a `.env` file.
 
-Your folder should look like this after cloning and running `npm install`:
+### Commands
+
+```bash
+node index.js compose          # start a campaign
+node index.js compose --dry-run  # preview without sending
+node index.js lists            # manage saved contact lists
+node index.js setup            # re-run the setup wizard
+node index.js --help
+```
+
+### Email Tones
+
+| Tone | Best for |
+|---|---|
+| Cold & Professional | First outreach to executives |
+| Urgent & Time-Sensitive | Limited-time offers, deadlines |
+| Excited & Enthusiastic | Product launches, big news |
+| Warm & Friendly | Relationship-building, warm leads |
+| Formal & Corporate | Enterprise, legal, finance sectors |
+| Casual & Conversational | Startups, tech, creative industries |
+
+### Project Structure (Tool 1)
+
 ```
 EmailProject/
 ├── index.js
 ├── package.json
 ├── .env.example
 ├── .gitignore
-├── README.md
 ├── commands/
 │   ├── compose.js
 │   └── manage-lists.js
@@ -81,134 +87,109 @@ EmailProject/
 │   ├── emailSender.js
 │   ├── tones.js
 │   └── recipients.js
-├── data/
-│   └── recipients.json
-└── node_modules/       ← created by npm install, not in the repo
+└── data/
+    └── recipients.json
 ```
 
 ---
 
-### Step 5 — Configure Your Keys (Setup Wizard)
+## Tool 2 — Phishing Detector
+### Powered by Fine-Tuned RoBERTa · 100% F1 Score
 
-Run the interactive setup wizard:
+A Python CLI that classifies emails as **PHISHING** or **LEGITIMATE** using a RoBERTa model fine-tuned on a custom dataset of 480 labeled emails.
 
-```bash
-node index.js setup
-```
+### Model Performance
 
-It will ask you for:
-- **Groq API Key** → paste the key from Step 2
-- **SMTP Host** → press Enter to keep `smtp.gmail.com`
-- **SMTP Port** → press Enter to keep `587`
-- **SMTP Email** → your Gmail address (e.g. `you@gmail.com`)
-- **SMTP Password** → paste the 16-character App Password from Step 3
-- **Display Name** → your name as it will appear to recipients
-
-This creates a `.env` file in your project folder with all your settings saved.
-
----
-
-### Step 6 — Run Your First Campaign
-
-```bash
-node index.js compose
-```
-
-You'll be guided through 4 steps:
-
-1. **About You** — your name, company, product, value propositions
-2. **About the Target** — recipient name, job title, company, pain points
-3. **Choose Tone** — 6 options (Cold, Urgent, Excited, Warm, Formal, Casual)
-4. **Select Recipients** — enter emails manually or load a saved list
-
----
-
-## All Available Commands
-
-```bash
-# Start a campaign
-node index.js compose
-
-# Preview without sending (safe for testing)
-node index.js compose --dry-run
-
-# Manage saved contact lists
-node index.js lists
-
-# Re-run the setup wizard
-node index.js setup
-
-# Show help
-node index.js --help
-```
-
----
-
-## Email Tones
-
-| Tone | Best for |
+| Metric | Score |
 |---|---|
-| 🧊 Cold & Professional | First outreach to executives |
-| 🔥 Urgent & Time-Sensitive | Limited-time offers, deadlines |
-| 🚀 Excited & Enthusiastic | Product launches, big news |
-| 🤝 Warm & Friendly | Relationship-building, warm leads |
-| 🎩 Formal & Corporate | Enterprise, legal, finance sectors |
-| 😎 Casual & Conversational | Startups, tech, creative industries |
+| Accuracy | 100% |
+| Precision | 100% |
+| Recall | 100% |
+| F1 | 100% |
+| Test samples | 96 (48 per class) |
 
----
-
-## Managing Recipient Lists
-
-You can save groups of emails as named lists for reuse:
+### Requirements
 
 ```bash
-node index.js lists
+pip install -r phishing-detector/requirements.txt
 ```
 
-Options:
-- **Create** a new list (enter emails one per line)
-- **View** a saved list
-- **Delete** a list
+Dependencies: `transformers`, `torch`, `datasets`, `scikit-learn`, `accelerate`, `rich`, `typer`
 
-Lists are stored in `data/recipients.json` on your machine.
+### Train the Model
 
----
+The trained weights are not included in the repo (11 GB). Train locally:
 
-## Troubleshooting
+```bash
+cd phishing-detector
+python -m train.fine_tune
+```
 
-**"GROQ_API_KEY is not set"**
-→ Run `node index.js setup` and enter your Groq key, or manually create a `.env` file based on `.env.example`
+This generates the dataset, fine-tunes RoBERTa, and saves the model to `models/roberta-phishing/`.
 
-**"SMTP connection failed"**
-→ Double-check your Gmail App Password — it must be the 16-character generated password, NOT your regular Gmail password.
+> If no local model is found, the scanner automatically falls back to a public HuggingFace model.
 
-**"App passwords" option missing in Google Account**
-→ You need to enable 2-Step Verification first under Security settings
+### Scan Emails
 
-**Emails going to spam**
-→ Normal for cold outreach. Consider warming up your Gmail account by sending a few manual emails first.
+```bash
+cd phishing-detector
 
-**"No valid recipients"**
-→ Make sure email addresses are valid and separated by commas or new lines
+# Scan text inline
+python -m scanner.cli scan --text "Your account has been suspended. Click here to verify."
+
+# Scan a file
+python -m scanner.cli scan --file email.txt
+
+# Scan a folder of .txt / .eml files
+python -m scanner.cli scan-batch --folder ./emails/ --output report.json
+
+# Interactive mode (paste and scan in real time)
+python -m scanner.cli interactive
+
+# Demo mode (5 built-in example emails)
+python -m scanner.cli demo
+```
+
+### Run Tests
+
+```bash
+cd phishing-detector
+python -m pytest tests/ -v
+```
+
+11 tests — all pass.
+
+### Project Structure (Tool 2)
+
+```
+phishing-detector/
+├── __main__.py
+├── __init__.py
+├── config.py
+├── requirements.txt
+├── data/
+│   ├── generate_dataset.py      # dataset generation
+│   ├── dataset.json             # 480 labeled emails
+│   └── verify_samples.py
+├── train/
+│   ├── fine_tune.py             # fine-tunes RoBERTa
+│   └── evaluate.py
+├── scanner/
+│   ├── cli.py                   # Typer CLI (scan / scan-batch / interactive / demo)
+│   ├── detect.py                # PhishingDetector class
+│   └── report.py                # batch report generator
+├── models/
+│   ├── evaluation_results.json  # saved eval metrics
+│   └── roberta-phishing/        # trained weights (not in repo — train locally)
+└── tests/
+    └── test_detector.py         # 11 unit tests
+```
 
 ---
 
 ## Privacy & Security
 
-- Your `.env` file contains sensitive keys — never share it or commit it to Git
-- `.env` and `node_modules/` are already listed in `.gitignore` — they will not be pushed to GitHub
-- Never delete or edit `.gitignore` unless you know what you are doing
-- Groq does not store your prompts permanently (see their privacy policy)
-- Emails are sent directly from your Gmail account
-- Use a spare Gmail account rather than your primary one for SMTP sending
-
----
-
-## Free Tier Limits
-
-| Service | Free Limit |
-|---|---|
-| Groq API | ~14,400 requests/day (very generous) |
-| Gmail SMTP | 500 emails/day |
-
-For most use cases, these limits are more than sufficient.
+- `.env` contains sensitive keys — never share it or commit it
+- `.env`, `node_modules/`, trained model weights, and `__pycache__` are all listed in `.gitignore`
+- Groq does not store your prompts permanently
+- Emails are sent directly from your Gmail account — use a spare account for SMTP sending

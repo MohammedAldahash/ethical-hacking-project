@@ -1,0 +1,40 @@
+{
+  "classification_report": {
+    "LEGITIMATE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 48.0
+    },
+    "PHISHING": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 48.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 96.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 96.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      48,
+      0
+    ],
+    [
+      0,
+      48
+    ]
+  ],
+  "total_test_samples": 96
+}

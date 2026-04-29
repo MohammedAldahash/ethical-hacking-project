@@ -4,3 +4,21 @@
 # Dependencies — regenerated with npm install
 node_modules/
 package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Trained model weights (too large for GitHub — train locally with python -m train.fine_tune)
+phishing-detector/models/roberta-phishing/
+
+# Claude internal
+.claude/
