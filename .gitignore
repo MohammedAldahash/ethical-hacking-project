@@ -20,5 +20,10 @@ venv/
 # Trained model weights (too large for GitHub — train locally with python -m train.fine_tune)
 phishing-detector/models/roberta-phishing/
 
+# Raw real-email corpora — large, may contain personal content; do not commit
+phishing-detector/data/raw/
+# HuggingFace dataset cache (if redirected into the project)
+phishing-detector/data/hf_cache/
+
 # Claude internal
 .claude/

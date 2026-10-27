@@ -1,40 +1,40 @@
 {
   "classification_report": {
     "LEGITIMATE": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 48.0
+      "precision": 0.9704433497536946,
+      "recall": 0.985,
+      "f1-score": 0.9776674937965261,
+      "support": 200.0
     },
     "PHISHING": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 48.0
+      "precision": 0.9847715736040609,
+      "recall": 0.97,
+      "f1-score": 0.9773299748110831,
+      "support": 200.0
     },
-    "accuracy": 1.0,
+    "accuracy": 0.9775,
     "macro avg": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 96.0
+      "precision": 0.9776074616788777,
+      "recall": 0.9775,
+      "f1-score": 0.9774987343038046,
+      "support": 400.0
     },
     "weighted avg": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 96.0
+      "precision": 0.9776074616788777,
+      "recall": 0.9775,
+      "f1-score": 0.9774987343038046,
+      "support": 400.0
     }
   },
   "confusion_matrix": [
     [
-      48,
-      0
+      197,
+      3
     ],
     [
-      0,
-      48
+      6,
+      194
     ]
   ],
-  "total_test_samples": 96
+  "total_test_samples": 400
 }
